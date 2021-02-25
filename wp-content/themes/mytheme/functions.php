@@ -100,8 +100,12 @@ add_filter('nav_menu_css_class', 'montheme_menu_class');
 add_filter('nav_menu_link_attributes', 'montheme_menu_link_class');
 
 
-// Impost class pour meta sponso //
+// Import class pour meta sponso //
 require_once('metaboxes/sponso.php');
 SponsoMetaBox::register();
+
+// Import class pour menu biens //
+require_once('options/agence.php');
+AgenceMenuPage::register();
 
 
