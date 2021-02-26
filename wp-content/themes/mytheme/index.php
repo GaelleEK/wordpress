@@ -25,6 +25,7 @@
     </div>
 
     <?php montheme_pagination() ?>
+    <?= paginate_links(); ?>
 
 <?php else: ?>
     <h1>Pas d'article</h1>
