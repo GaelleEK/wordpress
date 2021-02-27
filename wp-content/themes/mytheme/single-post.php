@@ -10,12 +10,10 @@
             Cet article est sponsorisé
         </div>
     <?php endif; ?>
-    <!--    -->
-    <?php //the_post_thumbnail() ?><!--      peut etre remplacer par  -->
+
     <p>
         <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title() ?>" style="width: 100%; height: auto;">
     </p>
-    <!--    -->
 
     <?php the_content() ?>
 
@@ -30,7 +28,6 @@
             'post__not_in' => [get_the_ID()],
             'post_type' => 'post',
             'posts_per_page' => 3,
-            'orderby' => 'rand',
             'tax_query' => [
                 [
                     'taxonomy' => 'sport',
@@ -38,25 +35,22 @@
                 ]
             ],
             /* condition sur les meta de l article
-            **** Recherche tous les articles sponsorisés
+            **** Recherche tous les articles sponsorisés*/
             'meta_query' => [
                 [
                     'key' => SponsoMetaBox::META_KEY,
-                    'compare' => 'EXISTS'
+                    'compare' => 'NOT EXISTS'
                 ]
             ]
-            */
+
         ]);
         while ($query->have_posts()): $query->the_post();
-            ?>
 
+            ?>
             <div class="col-sm-4">
                 <?php get_template_part('parts/card', 'post'); ?>
             </div>
-        <?php
-        endwhile;
-        wp_reset_postdata();
-        ?>
+        <?php endwhile; wp_reset_postdata(); ?>
     </div>
 
 <?php endwhile; endif; ?>

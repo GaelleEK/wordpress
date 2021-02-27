@@ -148,19 +148,23 @@ add_filter('manage_post_posts_custom_column', function ($column, $postId) {
         echo '<div class="bullet bullet-' . $class . '"></div>';
     }
 }, 10, 2);
-/*
-function montheme_pre_get_posts ($query)
+
+/**
+ * @param WP_Query $query
+ */
+function montheme_pre_get_posts (WP_Query $query)
 {
-    if (is_admin() || is_search() || !$query->is_main_query()) {
+    if (is_admin() || is_front_page() || !$query->is_main_query()) {
         return;
     }
-    if (get_query_var('sponso') === '1')
+    if (get_query_var('sponso') === '1') {
         $meta_query = $query->get('meta_query', []);
         $meta_query[] = [
             'key' => SponsoMetaBox::META_KEY,
             'compare' => 'EXISTS'
         ];
         $query->set('meta_query', $meta_query);
+    }
 }
 
 function montheme_query_vars ($params)
@@ -171,5 +175,19 @@ function montheme_query_vars ($params)
 
 add_action('pre_get_posts', 'montheme_pre_get_posts');
 add_filter('query_vars', 'montheme_query_vars');
-*/
+
+
+function montheme_register_widget ()
+{
+    register_sidebar([
+        'id' => 'homepage',
+        'name' => 'Sidebar Accueil',
+        'before_widget' => '<div class="p-4 %2$s" id="%1$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="font-italic">',
+        'after_title' => '</h4>'
+    ]);
+}
+
+add_action('widgets_init', 'montheme_register_widget');
 
