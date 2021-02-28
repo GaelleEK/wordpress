@@ -176,9 +176,11 @@ function montheme_query_vars ($params)
 add_action('pre_get_posts', 'montheme_pre_get_posts');
 add_filter('query_vars', 'montheme_query_vars');
 
+require_once 'widgets/YoutubeWidget.php';
 
 function montheme_register_widget ()
 {
+    register_widget(YoutubeWidget::class);
     register_sidebar([
         'id' => 'homepage',
         'name' => 'Sidebar Accueil',
