@@ -190,7 +190,7 @@ function montheme_register_widget ()
     register_widget(YoutubeWidget::class);
     register_sidebar([
         'id' => 'homepage',
-        'name' => 'Sidebar Accueil',
+        'name' => __('Sidebar Accueil', 'montheme'),
         'before_widget' => '<div class="p-4 %2$s" id="%1$s">',
         'after_widget' => '</div>',
         'before_title' => '<h4 class="font-italic">',
@@ -218,3 +218,9 @@ add_action('after_switch_theme', 'flush_rewrite_rules');
 //action appelé après la désactiavtion du theme
 add_action('switch_theme', 'flush_rewrite_rules');
 
+
+// mise en page traduction
+//https://developer.wordpress.org/themes/functionality/internationalization/d
+add_action('after_setup_theme', function () {
+    load_theme_textdomain('montheme', get_template_directory() . '/languages');
+});

@@ -1,4 +1,4 @@
-
+// la prévisulaisation de la couleur ne s affiche à corriger
 (function ($) {
 
     wp.customize('header_background', function (value) {
