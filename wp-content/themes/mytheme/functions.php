@@ -1,10 +1,13 @@
 <?php
 
+require_once('walker/CommentWalker.php');
+
 function montheme_supports()
 {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
+    add_theme_support('html5');
     register_nav_menu('header', 'En tête du menu');
     register_nav_menu('footer', 'Pied de page');
     add_image_size('card-header', 350, 215, true);
@@ -192,4 +195,16 @@ function montheme_register_widget ()
 }
 
 add_action('widgets_init', 'montheme_register_widget');
+
+// Adaptation du form à bootstrap pour le champ email
+//add_filter('comment_default_form_fields', function ($fields) {
+//    $fields['email'] = <<<HTML
+//<div class="form-group">
+//<label for="email">Email</label>
+//<input class="form-conrol" name="email" id="email" required>
+//</div>
+//HTML;
+//    return $fields;
+//});
+
 
