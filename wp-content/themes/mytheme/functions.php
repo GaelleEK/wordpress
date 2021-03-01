@@ -207,4 +207,10 @@ add_action('widgets_init', 'montheme_register_widget');
 //    return $fields;
 //});
 
+// ces 2 fonctions permette de garder les infos comme par exemple les sports
+//action avant l'activation du theme
+add_action('after_switch_theme', 'flush_rewrite_rules');
+
+//action appelé après la désactiavtion du theme
+add_action('switch_theme', 'flush_rewrite_rules');
 
