@@ -6,7 +6,7 @@
             'menu_class' => 'navbar-nav mr-auto'
         ]);
         // test widget autre facon de procéder
-        the_widget(YoutubeWidget::class, ['title' => 'salut', 'youtube' => 'X2kPLQEFR6Y']);
+        //the_widget(YoutubeWidget::class, ['title' => 'salut', 'youtube' => 'X2kPLQEFR6Y']);
         ?>
     </footer>
     <div>
