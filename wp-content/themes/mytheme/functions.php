@@ -232,3 +232,35 @@ add_action('after_setup_theme', function () {
 //var_dump($results);
 //echo '</pre>';
 //die();
+
+// * API : https://developer.wordpress.org/rest-api/
+// url a utiliser localhost/wp-json/montheme/v1/demo
+// (?P<id>\d+) signifie que ce qui est après ? ds l url est un parametre appelé id et d+ veu dire c un nb
+add_action('rest_api_init', function () {
+    register_rest_route('montheme/v1', '/demo/(?P<id>\d+)', [
+        'methods' => 'GET',
+        'callback' => function (WP_REST_Request $request) {
+            $postId = (int)$request->get_param('id');
+            $post = get_post($postId);
+            if ($post === null) {
+                return new WP_Error('rien', 'on a rien à voir', ['status' => 404]);
+            }
+            return $post->post_title;
+        },
+        'permission_callback' => function () {
+            return current_user_can('edit_posts');
+        }
+    ]);
+});
+
+add_filter('rest_authentication_errors', function ($result) {
+    if (true === $result || is_wp_error($result)) {
+        return $result;
+    }
+    /** @var WP $wp */
+    global $wp;
+    if (strpos($wp->query_vars['rest_route'], 'montheme/v1') !== false) {
+        return true;
+    }
+    return $result;
+}, 9);
