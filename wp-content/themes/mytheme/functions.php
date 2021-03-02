@@ -264,3 +264,20 @@ add_filter('rest_authentication_errors', function ($result) {
     }
     return $result;
 }, 9);
+
+function monthemeReadData () {
+    $data = wp_cache_get('data', 'montheme');
+    if ($data === false) {
+        var_dump('je lis');
+        $data = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'data');
+        wp_cache_set('data', $data, 'montheme', 60);
+    }
+    return $data;
+}
+
+if (isset($_GET['cachetest'])) {
+    var_dump(monthemeReadData());
+    var_dump(monthemeReadData());
+    var_dump(monthemeReadData());
+    die();
+}
