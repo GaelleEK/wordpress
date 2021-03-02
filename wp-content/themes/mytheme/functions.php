@@ -216,3 +216,19 @@ add_action('switch_theme', 'flush_rewrite_rules');
 add_action('after_setup_theme', function () {
     load_theme_textdomain('montheme', get_template_directory() . '/languages');
 });
+
+
+// * Exemple de requetes avec wpdb et exemple d'échappement
+//* %s = string %d = integer
+///** @var wpdb $wpdb */
+//global $wpdb;
+//
+//$tag = "tag1";
+//$query = $wpdb->prepare("SELECT * FROM {$wpdb->terms} WHERE slug=%s", [$tag]);
+//$results = $wpdb->get_var($query);
+//
+//
+//echo '<pre>';
+//var_dump($results);
+//echo '</pre>';
+//die();
